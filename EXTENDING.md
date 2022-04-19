@@ -7,7 +7,6 @@ import typing as T
 from node_require import (
     one_of, # Import one of given modules
     Loader, # ABC for all plugins
-    LibRequired # Exception that is raised when the required library is not installed
 )
 
 class HJSONLoader(Loader):

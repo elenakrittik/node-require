@@ -15,7 +15,7 @@ class HJSONLoader(Loader):
     """
     def __init__(self) -> None:
         self.hjson = one_of(['hjson']) # Assign the hjson module to variable
-        self.extensions: T.List[str] = ['.hjson'] List of extensions that plugin can load
+        self.extensions: T.List[str] = ['.hjson'] # List of extensions that plugin can load
         self.deps: T.List[str] = ['hjson'] # List of libraries required to load files of approritate extension(-s)
         self.optional_deps: T.Dict[str, str] = {} # A dictionary of libraries that are not required but can, e.g.,
                                                   # speed up decoding (or anything else) of files. It is a mapping

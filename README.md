@@ -7,7 +7,7 @@ Features
 --------
 
 - Importing modules from higher folders
-- Loading JSON, Toml, YAMl and BSON files natively
+- Loading JSON, Toml, YAML and BSON files natively
 - Easily extensible
 
 Installing

@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v2.0.1
+------
+
+- Fixed exports
+
 v2.0.0
 ------
 

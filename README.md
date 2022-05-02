@@ -100,3 +100,5 @@ Extending
 ---------
 
 See [guide](./EXTENDING.md) on this
+
+![Alt](https://repobeats.axiom.co/api/embed/089df6f9909352e080765276c5d78f0bb2145549.svg "Repobeats analytics image")

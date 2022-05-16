@@ -1,9 +1,9 @@
 import os
 import re
+import warnings
 import typing as T
 import importlib as ilib
 from pip._internal.commands.show import search_packages_info as spi
-# import warnings
 
 _almost_any: str = "[a-zA-Z0-9_\\./\\$&;!-#@~`\\^%\\{\\}\\[\\]\\(\\)\\+ ]"
 _l: str = "[a-zA-Z0-9_\\$&;!-#@~`\\^%\\{\\}\\[\\]\\(\\) ]"
@@ -22,7 +22,6 @@ class ExtNotSupported(Exception):
     """
     Exception that is raised when you trying to load unsupported file extension
     """
-    pass
 
 class LibRequired(Exception):
     """
@@ -41,7 +40,7 @@ class Loader:
         """
         A function to be overridden by developer.
         """
-        raise NotImplemented
+        raise NotImplementedError
 
 def require(q: str) -> T.Any:
     """

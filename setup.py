@@ -2,12 +2,12 @@ from setuptools import setup
 
 setup(
     name = "node_require",
-    author = "weerdy15",
-    url = "https://github.com/weerdy15/node-require",
+    author = "ItsAleph",
+    url = "https://github.com/ItsAleph/node-require",
     project_urls = {
-        "Issue tracker": "https://github.com/weerdy15/node-require/issues"
+        "Issue tracker": "https://github.com/ItsAleph/node-require/issues"
     },
-    version = "2.0.0",
+    version = "2.0.1",
     packages = [
         "node_require"
     ],

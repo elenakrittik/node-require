@@ -7,7 +7,7 @@ setup(
     project_urls = {
         "Issue tracker": "https://github.com/ItsAleph/node-require/issues"
     },
-    version = "2.0.1",
+    version = "2.0.2",
     packages = [
         "node_require"
     ],

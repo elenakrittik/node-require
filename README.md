@@ -1,14 +1,14 @@
 node-require
-=======
+============
 
-Like Node.js's require(), but with more supported file formats
+Like Node.js's require(), but with more supported file formats.
 
 Features
 --------
 
-- Importing modules from higher folders
-- Loading JSON, Toml, YAML and BSON files natively
-- Easily extensible
+- Importing modules from higher folders;
+- Loading JSON, Toml, YAML and BSON files natively;
+- Easily extensible.
 
 Installing
 ----------
@@ -17,20 +17,22 @@ Install base module:
 
 ```sh
 # Linux / MacOS
-python3 -m pip install -U require
+python3 -m pip install -U node-require
 
 # Windows
-py -3 -m pip install -U require
+py -3 -m pip install -U node-require
 ```
 
 Optional Dependencies
 ---------------------
 
-- `orjson`: Faster JSON decoding
-- `ujson`: Alternarive for `orjson`
-- `toml`: Support for Toml
-- `yaml`: Support for YAML
-- `bson`: Support for BSON
+- `orjson`: Faster JSON decoding;
+- `ujson`: Alternarive for `orjson`;
+- `toml`: Support for Toml;
+- `yaml`: Support for YAML;
+- `bson`: Support for BSON.
+
+You can install all of the language support dependencies at once with `"node-require[all_langs]"`.
 
 Quick notes
 -----------
@@ -100,5 +102,3 @@ Extending
 ---------
 
 See [guide](./EXTENDING.md) on this
-
-![Alt](https://repobeats.axiom.co/api/embed/089df6f9909352e080765276c5d78f0bb2145549.svg "Repobeats analytics image")

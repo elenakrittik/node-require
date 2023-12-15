@@ -7,7 +7,7 @@ on:
     paths:
       - .github
       - changelogs
-      - disnake
+      - node_require
       - docs
       # NOTE: No need for pyproject.toml here as both config and deps are in docs/ already.
 
@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11"]
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
       fail-fast: false
 
     steps:

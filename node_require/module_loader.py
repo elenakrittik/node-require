@@ -1,26 +1,31 @@
+# SPDX-License-Identifier: MIT
+
+import importlib
 import os
 import sys
-from .req_impl import Loader
+import typing as t
+from pathlib import PurePath
+from types import ModuleType
 
-class ModuleLoader(Loader):
-    """
-    Builtin loader for Python modules
-    """
-    def __init__(self):
-        self.extensions = ['.py']
-        self.deps = []
-        self.optional_deps = {}
-    
-    def load(self, path: str, file: str):
-        r = None
+from .require import Loader
+
+__all__ = ("ModuleLoader", )
+
+
+class ModuleLoader(Loader[ModuleType]):
+    """A pre-made loader for Python modules. Enabled by default."""
+
+    extensions: t.ClassVar[t.List[str]] = [".py"]
+
+    def load(self, path: PurePath) -> ModuleType:
         old = sys.path.copy()
-        sys.path = [os.path.abspath(path)]
-        try:
-            r = __import__(file[:-3])
-        except ModuleNotFoundError:
-            sys.path = old
-            raise ValueError(f"No such module: {file}") from None
-        sys.path = old
-        return r
+        sys.path = [os.path.abspath(path.parent)]
 
-loader = ModuleLoader
+        try:
+            module = importlib.import_module(path.stem)
+        except ModuleNotFoundError:
+            raise ValueError(f"No module at {path}") from None
+        finally:
+            sys.path = old
+
+        return module

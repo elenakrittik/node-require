@@ -1,0 +1,32 @@
+# SPDX-License-Identifier: MIT
+
+name: Build docs
+
+on:
+  push:
+    paths:
+      - .github
+      - changelogs
+      - node_require
+      - docs
+      # NOTE: No need for pyproject.toml here as both config and deps are in docs/ already.
+
+jobs:
+  build_docs:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12"]
+      fail-fast: false
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: pdm-project/setup-pdm@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: true
+        cache-dependency-path: 'pyproject.toml'
+
+    - run: pdm install -Gdocs
+    - run: cd docs && pdm run sphinx-build -aE -b html -n . _build/html

@@ -14,3 +14,4 @@ Welcome to node-require's documentation!
 
    api.rst
    changelog.rst
+   quickstart.rst

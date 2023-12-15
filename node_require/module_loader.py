@@ -19,7 +19,7 @@ class ModuleLoader(Loader[ModuleType]):
 
     def load(self, path: PurePath) -> ModuleType:
         old = sys.path.copy()
-        sys.path = [os.path.abspath(path)]
+        sys.path = [os.path.abspath(path.parent)]
 
         try:
             module = importlib.import_module(path.stem)

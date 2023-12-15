@@ -69,8 +69,8 @@ format = { composite = [
     "yapf docs/ --recursive --in-place",
 ], help = "Run yapf" }
 docs = { cmd = "sphinx-autobuild docs docs/_build/html", help = "Run Sphinx documentation server" }
-lint = { cmd = "ruff ./node_require ./docs ./examples", help = "Run ruff" }
-pyright = { cmd = "pyright node_require docs examples", help = "Run pyright" }
+lint = { cmd = "ruff ./node_require ./docs", help = "Run ruff" }
+pyright = { cmd = "pyright node_require docs", help = "Run pyright" }
 
 # You should generally use above commands instead
 yapf_check = { composite = [

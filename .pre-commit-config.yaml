@@ -45,3 +45,6 @@ repos:
     rev: v1.1.323
     hooks:
     - id: pyright
+
+ci:
+  skip: ["pyright"]

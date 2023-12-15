@@ -1,24 +1,24 @@
-import os
-import typing as T
-from .req_impl import Loader, _one_of, LibRequired
+# SPDX-License-Identifier: MIT
 
-class TomlLoader(Loader):
-    """
-    Builtin loader for Toml files
-    """
-    def __init__(self):
-        self.toml = _one_of(["toml"])
-        self.extensions = ['.toml']
-        self.deps = ['toml']
-        self.optional_deps = {}
-    
-    def load(self, path: str, file: str) -> T.Dict[str, T.Any]:
-        if not self.toml:
-            raise LibRequired("The toml library is required to load .toml files") from None
+import typing as t
+from pathlib import PurePath
+
+from .require import Loader, one_of
+
+__all__ = ("TOMLLoader", )
+
+
+class TOMLLoader(Loader[t.Dict[str, t.Any]]):
+    """A pre-made loader for TOML files."""
+
+    extensions: t.ClassVar[t.List[str]] = [".toml"]
+
+    def __init__(self) -> None:
+        self.toml = one_of(["toml"])
+
+    def load(self, path: PurePath) -> t.Dict[str, t.Any]:
         try:
-            with open(os.path.abspath(path) + '/' + file, 'r') as fp:
+            with open(path, "r") as fp:
                 return self.toml.loads(fp.read())
         except FileNotFoundError:
-            raise ValueError(f"No such file: {file}") from None
-
-loader = TomlLoader
+            raise ValueError(f"No such file: {path}") from None

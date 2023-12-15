@@ -1,104 +1,30 @@
-node-require
-============
+<!-- SPDX-License-Identifier: MIT -->
 
-Like Node.js's require(), but with more supported file formats.
+# node-require
 
-Features
---------
+Support for file `require()`ing, like in Node.js.
 
-- Importing modules from higher folders;
-- Loading JSON, Toml, YAML and BSON files natively;
-- Easily extensible.
-
-Installing
-----------
-
-Install base module:
-
-```sh
-# Linux / MacOS
-python3 -m pip install -U node-require
-
-# Windows
-py -3 -m pip install -U node-require
-```
-
-Optional Dependencies
----------------------
-
-- `orjson`: Faster JSON decoding;
-- `ujson`: Alternarive for `orjson`;
-- `toml`: Support for Toml;
-- `yaml`: Support for YAML;
-- `bson`: Support for BSON.
-
-You can install all of the language support dependencies at once with `"node-require[all_langs]"`.
-
-Quick notes
------------
-
-This lib does **not** support importing builtin modules or site-packages (modules installed with pip).
-
-Consider using usual `import`, or if you need a dynamic import, use Python's builtin `importlib.import_module`
-
-Usage
------
-
-__Yeah, that's bad example, but i'm can't come up with a best one..__
-
-Example directory structure:
-
-```
-src/
-    tests/
-        test.py
-    config.json
-    regex.py
-    main.py
-```
-
-`src/main.py`:
+## Example
 
 ```py
-import os
-import importlib
+import disnake
+from disnake.ext import commands, node_require
 
-for file in os.listdir('./tests'):
-    if file.endswith('.py'):
-        importlib.import_module(f'tests.{file[:-3]}').run()
+...
 ```
 
-`src/regex.py`:
+See [`./example`](./example) for more.
 
-```py
-import re
+## Version Guarantees
 
-PWD = re.compile("[a-zA-Z0-9_\.]{12,16}")
-```
+This project obeys the [Cargo SemVer](https://doc.rust-lang.org/cargo/reference/semver.html).
 
-`src/config.json`:
+## License
 
-```json
-{
-    "user": {
-        "name": "Jonh",
-        "password": "Fluffy_Gim19"
-    }
-}
-```
+This project is licensed under the GNU Lesser General Public License, version 3; see
+[LICENSE](./LICENSE) for more.
 
-`src/tests/test.py`:
+## Acknowledgements
 
-```py
-from require import require
-password_pattern = require('../regex.py').PWD
-password = require('../config.json')['user']['password']
-
-def run():
-    assert password_pattern.match(password) != None
-```
-
-Extending
----------
-
-See [guide](./EXTENDING.md) on this
+This project has portions of other software incorporated into it; please read
+[ACKNOWLEDGEMENTS.md](./ACKNOWLEDGEMENTS.md) for more.

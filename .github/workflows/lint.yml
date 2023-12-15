@@ -1,0 +1,32 @@
+# SPDX-License-Identifier: MIT
+
+name: Check with Ruff
+
+on:
+  push:
+    paths:
+      - .github
+      - disnake
+      - docs/conf.py
+      - example
+      - pyproject.toml
+
+jobs:
+  check_with_ruff:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
+      fail-fast: false
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: pdm-project/setup-pdm@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+        cache: true
+        cache-dependency-path: 'pyproject.toml'
+
+    - run: pdm install -Glint
+    - run: pdm run lint

@@ -1,24 +1,24 @@
-import os
-import typing as T
-from .req_impl import Loader, _one_of, LibRequired
+# SPDX-License-Identifier: MIT
 
-class YAMLLoader(Loader):
-    """
-    Builtin loader for YAML files
-    """
-    def __init__(self):
-        self.yaml = _one_of(["yaml"])
-        self.extensions = ['.yaml', '.yml']
-        self.deps = ['yaml']
-        self.optional_deps = {}
-    
-    def load(self, path: str, file: str) -> T.Dict[str, T.Any]:
-        if not self.yaml:
-            raise LibRequired("The yaml library is required to load .yaml files") from None
+import typing as t
+from pathlib import PurePath
+
+from .require import Loader, one_of
+
+__all__ = ("YAMLLoader", )
+
+
+class YAMLLoader(Loader[t.Dict[str, t.Any]]):
+    """A pre-made loader for YAML files."""
+
+    extensions: t.ClassVar[t.List[str]] = [".yaml", ".yml"]
+
+    def __init__(self) -> None:
+        self.yaml = one_of(["yaml"])
+
+    def load(self, path: PurePath) -> t.Dict[str, t.Any]:
         try:
-            with open(os.path.abspath(path) + '/' + file, 'r') as fp:
-                return self.yaml.loads(fp.read(), Loader=self.yaml.loader.FullLoader)
+            with open(path, "r") as fp:
+                return self.yaml.loads(fp.read(), Loader = self.yaml.loader.FullLoader)
         except FileNotFoundError:
-            raise ValueError(f"No such file: {file}") from None
-
-loader = YAMLLoader
+            raise ValueError(f"No such file: {path}") from None

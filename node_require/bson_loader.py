@@ -1,24 +1,24 @@
-import os
-import typing as T
-from .req_impl import Loader, _one_of, LibRequired
+# SPDX-License-Identifier: MIT
 
-class BSONLoader(Loader):
-    """
-    Builtin loader for BSON files
-    """
-    def __init__(self):
-        self.bson = _one_of(["bson"])
-        self.extensions = ['.bson']
-        self.deps = ["bson"]
-        self.optional_deps = {}
-    
-    def load(self, path: str, file: str) -> T.Dict[str, T.Any]:
-        if not self.bson:
-            raise LibRequired("The bson library is required to load .bson files") from None
+import typing as t
+from pathlib import PurePath
+
+from .require import Loader, one_of
+
+__all__ = ("BSONLoader", )
+
+
+class BSONLoader(Loader[t.Dict[str, t.Any]]):
+    """A pre-made loader for BSON files that outputs a dictionary."""
+
+    extensions: t.ClassVar[t.List[str]] = [".bson"]
+
+    def __init__(self) -> None:
+        self.bson = one_of(["bson"])
+
+    def load(self, path: PurePath) -> t.Dict[str, t.Any]:
         try:
-            with open(os.path.abspath(path) + '/' + file, 'rb') as fp:
+            with open(path, "rb") as fp:
                 return self.bson.loads(fp.read())
         except FileNotFoundError:
-            raise ValueError(f"No such file: {file}") from None
-
-loader = BSONLoader
+            raise ValueError(f"No such file: {path}") from None
